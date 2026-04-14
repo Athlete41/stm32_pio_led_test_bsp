@@ -1,4 +1,10 @@
-// 实现 BSP 接口
+/**
+  ===========================
+  * @file    : bsp.c
+  * @brief   : STM32F103RCT6 BSP 实现
+  * @author  : 白狼
+  ===========================
+  */
 
 #include "bsp.h"
 #include "stm32_init.h"
