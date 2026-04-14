@@ -6,9 +6,9 @@
   ===========================
   */
 
-#include "bsp.h"
-
 #ifndef TEST_MODE
+
+#include "bsp.h"
 
 int main(void) {
     BSP_Init();
