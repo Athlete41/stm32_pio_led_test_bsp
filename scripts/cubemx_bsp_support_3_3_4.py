@@ -1,5 +1,7 @@
 # scripts/cubemx_bsp_support.py
 """
+PIO IDE Version v3.3.4
+
 适用于 STM32CubeMX 生成的裸机配置代码。
 将 Core/Inc 和 Core/Src 中的文件全部拷贝到项目根目录下的 Init 文件夹（平铺），
 并重命名 main.c -> stm32_init.c，main.h -> stm32_init.h，
@@ -10,9 +12,17 @@
 import re
 import shutil
 from pathlib import Path
-import os
+import sys
+
+print(f"完整命令行: {sys.argv}")
 
 Import("env")
+
+
+def is_clean_command():
+    """不知道为什么其他方式很难判断是否是 clean 命令"""
+    return "--clean" in sys.argv
+
 
 def copy_and_modify_core_to_init(core_dir):
     """将 Core/Inc 和 Core/Src 中的所有文件平铺拷贝到 Init 目录，并修改内容"""
