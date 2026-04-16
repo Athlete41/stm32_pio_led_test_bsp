@@ -1,4 +1,4 @@
-# scripts/cubemx_bsp_support.py
+# scripts/cubemx_bsp_support_3_3_4.py
 """
 PIO IDE Version v3.3.4
 
@@ -14,8 +14,6 @@ import shutil
 from pathlib import Path
 import sys
 
-print(f"完整命令行: {sys.argv}")
-
 Import("env")
 
 
@@ -24,8 +22,14 @@ def is_clean_command():
     return "--clean" in sys.argv
 
 
-def copy_and_modify_core_to_init(core_dir):
+def run(env):
     """将 Core/Inc 和 Core/Src 中的所有文件平铺拷贝到 Init 目录，并修改内容"""
+    core_dir = env.GetProjectOption('cubemx_core_dir')
+
+    if not core_dir:
+        print("[SCRIPT] Warning: cubemx_core_dir not set, skipping.")
+        return
+
     project_dir = Path(env.subst("$PROJECT_DIR"))
     core_path = project_dir / core_dir
     init_path = core_path.parent / "Init"
@@ -120,13 +124,22 @@ def copy_and_modify_core_to_init(core_dir):
     print("[SCRIPT] Init directory generation complete.")
     return True
 
-def process_cubemx_files(env):
+def clean(env):
     core_dir = env.GetProjectOption('cubemx_core_dir')
-    if not core_dir:
-        print("[SCRIPT] Warning: cubemx_core_dir not set, skipping.")
-        return
-    copy_and_modify_core_to_init(core_dir)
+    project_dir = Path(env.subst("$PROJECT_DIR"))
+    core_path = project_dir / core_dir
+    init_path = core_path.parent / "Init"
+
+    # 删除已存在的 Init 目录
+    if init_path.exists():
+        shutil.rmtree(init_path)
+        print(f"[SCRIPT] Removed existing Init directory: {init_path}")
 
 print('================== start process cubemx files ==================')
-process_cubemx_files(env)
+
+if not is_clean_command():
+    run(env)
+else:
+    clean(env)
+
 print('================== end process cubemx files ==================')
