@@ -1,13 +1,11 @@
 /**
   ===========================
-  * @file    : jumpbootloader.c
+  * @file    : bsp_jumpbootloader.c
   * @brief   : 跳转系统BootLoader 
-  * @note    : 这是在运行模式下跳转的，DFU需要模拟插拔。
   ===========================
   */
  
-#include "jumpbootloader.h"
-
+#include "bsp_jumpbootloader.h"
 
 #define BOOTLOADER_VECTOR_TABLE_BASE  0x1FFF0000
 #define BOOTLOADER_ENTRY  BOOTLOADER_VECTOR_TABLE_BASE + 4
@@ -57,20 +55,20 @@ static void JumpToBootloader(void) {
 
 
 #define DELAY_US_CYCLES (SystemCoreClock / 1000000)
-static void delay_us(uint32_t us) {
+static void Delay_us(uint32_t us) {
     uint32_t cycles = us * DELAY_US_CYCLES;
     while(cycles--) __NOP();
 }
 
-static void delay_ms(uint32_t ms)
+static void Delay_ms(uint32_t ms)
 {
     for(uint32_t i = 0; i < ms; i++)
     {
-        delay_us(1000);
+        Delay_us(1000);
     }
 }
 
-static void GPIO_DP_Init(void)
+static void SetDPLow(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
@@ -89,15 +87,11 @@ static void GPIO_DP_Init(void)
 static void JumpToBootloaderDFU(void)
 {
     __disable_irq();
-    GPIO_DP_Init();
+
+    // 模拟USB插拔
+    SetDPLow();
     delay_ms(200);
+
     JumpToBootloader();
 }
 
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-    UNUSED(GPIO_Pin);
-
-    JumpToBootloaderDFU();
-}

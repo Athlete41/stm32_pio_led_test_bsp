@@ -1,17 +1,12 @@
 /**
   ===========================
-  * @file    : bsp.c
-  * @brief   : BSP 实现 (STM32F407ZGT6)
+  * @file    : bsp_led_test.c
+  * @brief   : LED 测试模块所需的相关硬件接口 实现 (STM32F407ZGT6)
+  * @author  : 白狼
   ===========================
   */
 
-#include "bsp.h"
-#include "stm32_init.h"
-
-void BSP_Peripheral_Init(void)
-{
-    STM32_Init();
-}
+#include "bsp_led_test.h"
 
 void BSP_SetLED(uint8_t state)
 {

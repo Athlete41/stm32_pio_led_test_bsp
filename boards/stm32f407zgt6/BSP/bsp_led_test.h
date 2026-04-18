@@ -1,19 +1,16 @@
 /**
   ===========================
-  * @file    : bsp.h
-  * @brief   : BSP 接口 (STM32F407ZGT6)
+  * @file    : bsp_led_test.h
+  * @brief   : LED 测试模块所需的相关硬件接口 声明 (STM32F407ZGT6)
+  * @author  : 白狼
   ===========================
   */
 
-#ifndef BSP_H
-#define BSP_H
+#ifndef BSP_LED_TEST_H
+#define BSP_LED_TEST_H
 
+#include "stm32f4xx_hal.h"
 #include <stdint.h>
-/**
- * @brief 初始化单片机外设等配置
- *
- */
-void BSP_Peripheral_Init(void);
 
 /**
  * @brief 设置 LED 状态

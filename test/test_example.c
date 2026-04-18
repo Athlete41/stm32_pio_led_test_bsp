@@ -8,10 +8,10 @@
 #if defined(TEST_MODE) && defined(TEST_EXAMPLE)
 
 #include "led_test.h"
-#include "bsp.h"
+#include "bsp_led_test.h"
 
 int main(void) {
-    BSP_Peripheral_Init();
+
 
     LEDTest_Init(BSP_DelayMs_Block, BSP_SetLED);
     while (1)

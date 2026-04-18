@@ -3,5 +3,5 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
-boards/*/Init/*
-boards/*/Init/*
+boards/*/CubeMx_Init/*
+boards/*/CubeMx_Init/*

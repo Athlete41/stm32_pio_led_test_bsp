@@ -1,9 +1,8 @@
 /**
   ===========================
-  * @file    : bsp_extihook.h
-  * @brief   : 外部中断钩子管理 接口 (STM32F407ZGT6)
-  * @note    : 因为STM32常有多个中断复用一个入口，所以需要分发, 这里是个非常简单例子。
-  * @note    : 最好在注册钩子时关闭中断，避免极端情况下跑飞，不建议在中断回调中注册
+  * @file    : bsp_exti_dispatch.h
+  * @brief   : 外部中断分发器 (STM32F407ZGT6)
+  * @note    : 这里是个非常简单例子, 没有提供优先级参数
   ===========================
   */
 
@@ -15,23 +14,23 @@
 
 typedef enum
 {
-    EXTI_LINE_0 = 0,
-    EXTI_LINE_1,
-    EXTI_LINE_2,
-    EXTI_LINE_3,
-    EXTI_LINE_4,
-    EXTI_LINE_5,
-    EXTI_LINE_6,
-    EXTI_LINE_7,
-    EXTI_LINE_8,
-    EXTI_LINE_9,
-    EXTI_LINE_10,
-    EXTI_LINE_11,
-    EXTI_LINE_12,
-    EXTI_LINE_13,
-    EXTI_LINE_14,
-    EXTI_LINE_15,
-    EXTI_LINE_MAX
+    BSP_EXTI_LINE_0 = 0,
+    BSP_EXTI_LINE_1,
+    BSP_EXTI_LINE_2,
+    BSP_EXTI_LINE_3,
+    BSP_EXTI_LINE_4,
+    BSP_EXTI_LINE_5,
+    BSP_EXTI_LINE_6,
+    BSP_EXTI_LINE_7,
+    BSP_EXTI_LINE_8,
+    BSP_EXTI_LINE_9,
+    BSP_EXTI_LINE_10,
+    BSP_EXTI_LINE_11,
+    BSP_EXTI_LINE_12,
+    BSP_EXTI_LINE_13,
+    BSP_EXTI_LINE_14,
+    BSP_EXTI_LINE_15,
+    BSP_EXTI_LINE_MAX
 } extiLine_t;
 
 #define MAX_HOOKS_PER_LINE 5
