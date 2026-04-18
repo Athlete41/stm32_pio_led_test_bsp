@@ -36,5 +36,5 @@ __attribute__((constructor)) static void EXTI_DFU_Handler_Init(void)
 
 __attribute__((constructor)) static void Peripheral_Init(void)
 {
-    STM32_CubeMx_Init();
+    STM32_CubeMX_Init();
 }
