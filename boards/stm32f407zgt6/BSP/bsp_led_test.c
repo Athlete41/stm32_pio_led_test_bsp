@@ -21,3 +21,18 @@ void BSP_DelayMs_Block(uint32_t ms)
 {
     HAL_Delay(ms);
 }
+
+
+#define DELAY_US_CYCLES (SystemCoreClock / 1000000)
+static void delay_us(uint32_t us) {
+    uint32_t cycles = us * DELAY_US_CYCLES;
+    while(cycles--) __NOP();
+}
+
+void BSP_DelayMS_NOP(uint32_t ms)
+{
+    for(uint32_t i = 0; i < ms; i++)
+    {
+        delay_us(1000);
+    }
+}

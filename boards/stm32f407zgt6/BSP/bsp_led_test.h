@@ -20,7 +20,16 @@ void BSP_SetLED(uint8_t state);
 /**
  * @brief 延时指定毫秒数 （阻塞式）
  * @param ms 延时时间 (毫秒)
+ * @note 该函数可以依赖滴答定时器中断, 如果依赖， 则不可在中断中调用
  */
 void BSP_DelayMs_Block(uint32_t ms);
+
+
+/**
+ * @brief 延时指定毫秒数 （阻塞式）
+ * @param ms 延时时间 (毫秒)
+ * @note 该函数必须不依赖任何中断, 必须可在中断中调用
+ */
+void BSP_DelayMS_NOP(uint32_t ms);
 
 #endif

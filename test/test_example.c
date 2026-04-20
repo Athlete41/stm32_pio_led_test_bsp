@@ -7,16 +7,14 @@
 
 #if defined(TEST_MODE) && defined(TEST_EXAMPLE)
 
-#include "led_test.h"
-#include "bsp_led_test.h"
+#include "main.h"
+
 
 int main(void) {
-
-
     LEDTest_Init(BSP_DelayMs_Block, BSP_SetLED);
+    
     while (1)
     {
-        // 测试代码 200ms 闪烁一次
         LEDTest_Blink(100);
     }
 }
